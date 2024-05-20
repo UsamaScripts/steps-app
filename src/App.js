@@ -10,10 +10,14 @@ function App() {
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(true);
   function HandleNext() {
-    if (step < 3) setStep(step + 1);
+    if (step < 3) {
+      setStep((s) => s + 1);
+    }
   }
   function HandlePrevous() {
-    if (step > 1) setStep(step - 1);
+    if (step > 1) {
+      setStep((s) => s - 1);
+    }
   }
 
   return (
@@ -21,7 +25,7 @@ function App() {
       <button
         className="close"
         onClick={() => {
-          setIsOpen(!isOpen);
+          setIsOpen((is) => !is);
         }}
       >
         &times;
@@ -38,7 +42,7 @@ function App() {
           </p>
 
           <div className="buttons">
-            <button
+            {/* <button
               onClick={HandlePrevous}
               style={{ backgroundColor: "#7950f2", color: "#fff" }}
             >
@@ -49,10 +53,29 @@ function App() {
               style={{ backgroundColor: "#7950f2", color: "#fff" }}
             >
               Next
-            </button>
+            </button> */}
+
+            <Button onClick={HandlePrevous} bg="#7950f2" textColor="#fff">
+              <span>👈🏼</span> Prevoius
+            </Button>
+            <Button onClick={HandleNext} bg="#7950f2" textColor="#fff">
+              Next <span>👉🏼</span>
+            </Button>
           </div>
         </div>
       )}
+    </>
+  );
+}
+function Button({ onClick, bg, textColor, children }) {
+  return (
+    <>
+      <button
+        onClick={onClick}
+        style={{ backgroundColor: bg, color: textColor }}
+      >
+        {children}
+      </button>
     </>
   );
 }
